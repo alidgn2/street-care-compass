@@ -9,38 +9,150 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
+import { Route as AuthenticatedIhbarlarRouteImport } from './routes/_authenticated/ihbarlar'
+import { Route as AuthenticatedHayvanlarRouteImport } from './routes/_authenticated/hayvanlar'
+import { Route as AuthenticatedHaritaRouteImport } from './routes/_authenticated/harita'
+import { Route as AuthenticatedSohbetIndexRouteImport } from './routes/_authenticated/sohbet.index'
+import { Route as AuthenticatedSohbetIdRouteImport } from './routes/_authenticated/sohbet.$id'
 
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedIhbarlarRoute = AuthenticatedIhbarlarRouteImport.update({
+  id: '/ihbarlar',
+  path: '/ihbarlar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHayvanlarRoute = AuthenticatedHayvanlarRouteImport.update({
+  id: '/hayvanlar',
+  path: '/hayvanlar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHaritaRoute = AuthenticatedHaritaRouteImport.update({
+  id: '/harita',
+  path: '/harita',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSohbetIndexRoute =
+  AuthenticatedSohbetIndexRouteImport.update({
+    id: '/sohbet/',
+    path: '/sohbet/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSohbetIdRoute = AuthenticatedSohbetIdRouteImport.update({
+  id: '/sohbet/$id',
+  path: '/sohbet/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/harita': typeof AuthenticatedHaritaRoute
+  '/hayvanlar': typeof AuthenticatedHayvanlarRoute
+  '/ihbarlar': typeof AuthenticatedIhbarlarRoute
+  '/profil': typeof AuthenticatedProfilRoute
+  '/sohbet/$id': typeof AuthenticatedSohbetIdRoute
+  '/sohbet/': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/harita': typeof AuthenticatedHaritaRoute
+  '/hayvanlar': typeof AuthenticatedHayvanlarRoute
+  '/ihbarlar': typeof AuthenticatedIhbarlarRoute
+  '/profil': typeof AuthenticatedProfilRoute
+  '/sohbet/$id': typeof AuthenticatedSohbetIdRoute
+  '/sohbet': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/harita': typeof AuthenticatedHaritaRoute
+  '/_authenticated/hayvanlar': typeof AuthenticatedHayvanlarRoute
+  '/_authenticated/ihbarlar': typeof AuthenticatedIhbarlarRoute
+  '/_authenticated/profil': typeof AuthenticatedProfilRoute
+  '/_authenticated/sohbet/$id': typeof AuthenticatedSohbetIdRoute
+  '/_authenticated/sohbet/': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/harita'
+    | '/hayvanlar'
+    | '/ihbarlar'
+    | '/profil'
+    | '/sohbet/$id'
+    | '/sohbet/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/harita'
+    | '/hayvanlar'
+    | '/ihbarlar'
+    | '/profil'
+    | '/sohbet/$id'
+    | '/sohbet'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/harita'
+    | '/_authenticated/hayvanlar'
+    | '/_authenticated/ihbarlar'
+    | '/_authenticated/profil'
+    | '/_authenticated/sohbet/$id'
+    | '/_authenticated/sohbet/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +160,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/profil': {
+      id: '/_authenticated/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof AuthenticatedProfilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ihbarlar': {
+      id: '/_authenticated/ihbarlar'
+      path: '/ihbarlar'
+      fullPath: '/ihbarlar'
+      preLoaderRoute: typeof AuthenticatedIhbarlarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/hayvanlar': {
+      id: '/_authenticated/hayvanlar'
+      path: '/hayvanlar'
+      fullPath: '/hayvanlar'
+      preLoaderRoute: typeof AuthenticatedHayvanlarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/harita': {
+      id: '/_authenticated/harita'
+      path: '/harita'
+      fullPath: '/harita'
+      preLoaderRoute: typeof AuthenticatedHaritaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sohbet/': {
+      id: '/_authenticated/sohbet/'
+      path: '/sohbet'
+      fullPath: '/sohbet/'
+      preLoaderRoute: typeof AuthenticatedSohbetIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sohbet/$id': {
+      id: '/_authenticated/sohbet/$id'
+      path: '/sohbet/$id'
+      fullPath: '/sohbet/$id'
+      preLoaderRoute: typeof AuthenticatedSohbetIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedHaritaRoute: typeof AuthenticatedHaritaRoute
+  AuthenticatedHayvanlarRoute: typeof AuthenticatedHayvanlarRoute
+  AuthenticatedIhbarlarRoute: typeof AuthenticatedIhbarlarRoute
+  AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
+  AuthenticatedSohbetIdRoute: typeof AuthenticatedSohbetIdRoute
+  AuthenticatedSohbetIndexRoute: typeof AuthenticatedSohbetIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedHaritaRoute: AuthenticatedHaritaRoute,
+  AuthenticatedHayvanlarRoute: AuthenticatedHayvanlarRoute,
+  AuthenticatedIhbarlarRoute: AuthenticatedIhbarlarRoute,
+  AuthenticatedProfilRoute: AuthenticatedProfilRoute,
+  AuthenticatedSohbetIdRoute: AuthenticatedSohbetIdRoute,
+  AuthenticatedSohbetIndexRoute: AuthenticatedSohbetIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
