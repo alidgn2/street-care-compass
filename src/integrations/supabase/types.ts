@@ -14,7 +14,286 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      animal_sightings: {
+        Row: {
+          animal_id: string
+          created_at: string
+          id: string
+          lat: number | null
+          lng: number | null
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          animal_id: string
+          created_at?: string
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          animal_id?: string
+          created_at?: string
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "animal_sightings_animal_id_fkey"
+            columns: ["animal_id"]
+            isOneToOne: false
+            referencedRelation: "animals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      animals: {
+        Row: {
+          city: string | null
+          created_at: string
+          created_by: string
+          description: string | null
+          id: string
+          lat: number | null
+          lng: number | null
+          name: string | null
+          neighborhood: string | null
+          neutered: boolean
+          photo_url: string | null
+          species: string
+          street_name: string | null
+          updated_at: string
+          vaccinated: boolean
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          created_by: string
+          description?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          name?: string | null
+          neighborhood?: string | null
+          neutered?: boolean
+          photo_url?: string | null
+          species: string
+          street_name?: string | null
+          updated_at?: string
+          vaccinated?: boolean
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          name?: string | null
+          neighborhood?: string | null
+          neutered?: boolean
+          photo_url?: string | null
+          species?: string
+          street_name?: string | null
+          updated_at?: string
+          vaccinated?: boolean
+        }
+        Relationships: []
+      }
+      conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_message_at: string
+          user1_id: string
+          user2_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          user1_id: string
+          user2_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          user1_id?: string
+          user2_id?: string
+        }
+        Relationships: []
+      }
+      feedings: {
+        Row: {
+          city: string | null
+          created_at: string
+          feeding_type: string
+          id: string
+          lat: number
+          lng: number
+          neighborhood: string | null
+          notes: string | null
+          photo_url: string | null
+          street_name: string | null
+          user_id: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          feeding_type: string
+          id?: string
+          lat: number
+          lng: number
+          neighborhood?: string | null
+          notes?: string | null
+          photo_url?: string | null
+          street_name?: string | null
+          user_id: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          feeding_type?: string
+          id?: string
+          lat?: number
+          lng?: number
+          neighborhood?: string | null
+          notes?: string | null
+          photo_url?: string | null
+          street_name?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      injury_reports: {
+        Row: {
+          city: string | null
+          created_at: string
+          description: string
+          id: string
+          lat: number
+          lng: number
+          neighborhood: string | null
+          photo_url: string | null
+          resolved_by: string | null
+          severity: string
+          status: string
+          street_name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          description: string
+          id?: string
+          lat: number
+          lng: number
+          neighborhood?: string | null
+          photo_url?: string | null
+          resolved_by?: string | null
+          severity: string
+          status?: string
+          street_name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          lat?: number
+          lng?: number
+          neighborhood?: string | null
+          photo_url?: string | null
+          resolved_by?: string | null
+          severity?: string
+          status?: string
+          street_name?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          feeding_count: number
+          full_name: string | null
+          id: string
+          neighborhood: string | null
+          rescue_count: number
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          feeding_count?: number
+          full_name?: string | null
+          id: string
+          neighborhood?: string | null
+          rescue_count?: number
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          feeding_count?: number
+          full_name?: string | null
+          id?: string
+          neighborhood?: string | null
+          rescue_count?: number
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
