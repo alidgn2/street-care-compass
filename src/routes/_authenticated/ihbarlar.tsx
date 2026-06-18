@@ -7,7 +7,7 @@ import { getCurrentPosition, reverseGeocode, timeAgo } from "@/lib/pati-utils";
 import { Plus, X, Camera, AlertTriangle, MapPin, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/reports")({
+export const Route = createFileRoute("/_authenticated/ihbarlar")({
   head: () => ({
     meta: [
       { title: "İhbarlar — PatiHarita" },

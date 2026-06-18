@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Send } from "lucide-react";
 import { timeAgo } from "@/lib/pati-utils";
 
-export const Route = createFileRoute("/_authenticated/chat/$id")({
+export const Route = createFileRoute("/_authenticated/sohbet/$id")({
   head: ({ params }) => ({
     meta: [{ title: `Sohbet — PatiHarita` }, { name: "description", content: "Sohbet detayı" }],
   }),

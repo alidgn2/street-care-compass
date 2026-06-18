@@ -6,7 +6,7 @@ import { timeAgo } from "@/lib/pati-utils";
 import { MessageCircle, UserPlus, Search } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/chat")({
+export const Route = createFileRoute("/_authenticated/sohbet")({
   head: () => ({
     meta: [
       { title: "Sohbet — PatiHarita" },

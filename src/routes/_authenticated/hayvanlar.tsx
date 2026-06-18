@@ -7,7 +7,7 @@ import { getCurrentPosition, reverseGeocode } from "@/lib/pati-utils";
 import { Plus, X, Camera, PawPrint, Cat, Dog, Syringe, Scissors, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/animals")({
+export const Route = createFileRoute("/_authenticated/hayvanlar")({
   head: () => ({
     meta: [
       { title: "Hayvanlar — PatiHarita" },

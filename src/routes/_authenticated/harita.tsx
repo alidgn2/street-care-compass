@@ -8,7 +8,7 @@ import { getCurrentPosition, feedingFreshness, timeAgo } from "@/lib/pati-utils"
 import { Plus, Locate, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/_authenticated/harita")({
   head: () => ({
     meta: [
       { title: "Harita — PatiHarita" },

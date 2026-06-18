@@ -5,7 +5,7 @@ import { AppShell, PageHeader } from "@/components/AppShell";
 import { LogOut, Utensils, Heart, Pencil, Check } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/profile")({
+export const Route = createFileRoute("/_authenticated/profil")({
   head: () => ({
     meta: [{ title: "Profil — PatiHarita" }, { name: "description", content: "Profil bilgilerin ve gönüllü istatistiklerin." }],
   }),
