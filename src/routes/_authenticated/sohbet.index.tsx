@@ -6,7 +6,7 @@ import { timeAgo } from "@/lib/pati-utils";
 import { MessageCircle, UserPlus, Search } from "lucide-react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/sohbet")({
+export const Route = createFileRoute("/_authenticated/sohbet/")({
   head: () => ({
     meta: [
       { title: "Sohbet — PatiHarita" },
@@ -77,7 +77,7 @@ function ChatList() {
           </div>
         )}
         {convs.map((c) => (
-          <Link key={c.id} to="/app/chat/$id" params={{ id: c.id }} className="flex items-center gap-3 px-4 py-3 transition hover:bg-muted/50">
+          <Link key={c.id} to="/sohbet/$id" params={{ id: c.id }} className="flex items-center gap-3 px-4 py-3 transition hover:bg-muted/50">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-secondary font-bold">
               {c.other?.full_name?.[0] ?? c.other?.username?.[0] ?? "?"}
             </div>
@@ -125,7 +125,7 @@ function NewChatDialog({ onClose, currentUserId, onCreated }: { onClose: () => v
     }
     onCreated();
     onClose();
-    window.location.href = `/app/chat/${convId}`;
+    window.location.href = `/sohbet/${convId}`;
   }
 
   return (

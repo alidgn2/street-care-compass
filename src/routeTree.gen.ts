@@ -12,11 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedSohbetRouteImport } from './routes/_authenticated/sohbet'
 import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
 import { Route as AuthenticatedIhbarlarRouteImport } from './routes/_authenticated/ihbarlar'
 import { Route as AuthenticatedHayvanlarRouteImport } from './routes/_authenticated/hayvanlar'
 import { Route as AuthenticatedHaritaRouteImport } from './routes/_authenticated/harita'
+import { Route as AuthenticatedSohbetIndexRouteImport } from './routes/_authenticated/sohbet.index'
 import { Route as AuthenticatedSohbetIdRouteImport } from './routes/_authenticated/sohbet.$id'
 
 const AuthRoute = AuthRouteImport.update({
@@ -32,11 +32,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedSohbetRoute = AuthenticatedSohbetRouteImport.update({
-  id: '/sohbet',
-  path: '/sohbet',
-  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
   id: '/profil',
@@ -58,10 +53,16 @@ const AuthenticatedHaritaRoute = AuthenticatedHaritaRouteImport.update({
   path: '/harita',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSohbetIndexRoute =
+  AuthenticatedSohbetIndexRouteImport.update({
+    id: '/sohbet/',
+    path: '/sohbet/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSohbetIdRoute = AuthenticatedSohbetIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AuthenticatedSohbetRoute,
+  id: '/sohbet/$id',
+  path: '/sohbet/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -71,8 +72,8 @@ export interface FileRoutesByFullPath {
   '/hayvanlar': typeof AuthenticatedHayvanlarRoute
   '/ihbarlar': typeof AuthenticatedIhbarlarRoute
   '/profil': typeof AuthenticatedProfilRoute
-  '/sohbet': typeof AuthenticatedSohbetRouteWithChildren
   '/sohbet/$id': typeof AuthenticatedSohbetIdRoute
+  '/sohbet/': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -81,8 +82,8 @@ export interface FileRoutesByTo {
   '/hayvanlar': typeof AuthenticatedHayvanlarRoute
   '/ihbarlar': typeof AuthenticatedIhbarlarRoute
   '/profil': typeof AuthenticatedProfilRoute
-  '/sohbet': typeof AuthenticatedSohbetRouteWithChildren
   '/sohbet/$id': typeof AuthenticatedSohbetIdRoute
+  '/sohbet': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,8 +94,8 @@ export interface FileRoutesById {
   '/_authenticated/hayvanlar': typeof AuthenticatedHayvanlarRoute
   '/_authenticated/ihbarlar': typeof AuthenticatedIhbarlarRoute
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
-  '/_authenticated/sohbet': typeof AuthenticatedSohbetRouteWithChildren
   '/_authenticated/sohbet/$id': typeof AuthenticatedSohbetIdRoute
+  '/_authenticated/sohbet/': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,8 +106,8 @@ export interface FileRouteTypes {
     | '/hayvanlar'
     | '/ihbarlar'
     | '/profil'
-    | '/sohbet'
     | '/sohbet/$id'
+    | '/sohbet/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,8 +116,8 @@ export interface FileRouteTypes {
     | '/hayvanlar'
     | '/ihbarlar'
     | '/profil'
-    | '/sohbet'
     | '/sohbet/$id'
+    | '/sohbet'
   id:
     | '__root__'
     | '/'
@@ -126,8 +127,8 @@ export interface FileRouteTypes {
     | '/_authenticated/hayvanlar'
     | '/_authenticated/ihbarlar'
     | '/_authenticated/profil'
-    | '/_authenticated/sohbet'
     | '/_authenticated/sohbet/$id'
+    | '/_authenticated/sohbet/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,13 +160,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/sohbet': {
-      id: '/_authenticated/sohbet'
-      path: '/sohbet'
-      fullPath: '/sohbet'
-      preLoaderRoute: typeof AuthenticatedSohbetRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/profil': {
       id: '/_authenticated/profil'
       path: '/profil'
@@ -194,33 +188,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHaritaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/sohbet/': {
+      id: '/_authenticated/sohbet/'
+      path: '/sohbet'
+      fullPath: '/sohbet/'
+      preLoaderRoute: typeof AuthenticatedSohbetIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/sohbet/$id': {
       id: '/_authenticated/sohbet/$id'
-      path: '/$id'
+      path: '/sohbet/$id'
       fullPath: '/sohbet/$id'
       preLoaderRoute: typeof AuthenticatedSohbetIdRouteImport
-      parentRoute: typeof AuthenticatedSohbetRoute
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
-
-interface AuthenticatedSohbetRouteChildren {
-  AuthenticatedSohbetIdRoute: typeof AuthenticatedSohbetIdRoute
-}
-
-const AuthenticatedSohbetRouteChildren: AuthenticatedSohbetRouteChildren = {
-  AuthenticatedSohbetIdRoute: AuthenticatedSohbetIdRoute,
-}
-
-const AuthenticatedSohbetRouteWithChildren =
-  AuthenticatedSohbetRoute._addFileChildren(AuthenticatedSohbetRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedHaritaRoute: typeof AuthenticatedHaritaRoute
   AuthenticatedHayvanlarRoute: typeof AuthenticatedHayvanlarRoute
   AuthenticatedIhbarlarRoute: typeof AuthenticatedIhbarlarRoute
   AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
-  AuthenticatedSohbetRoute: typeof AuthenticatedSohbetRouteWithChildren
+  AuthenticatedSohbetIdRoute: typeof AuthenticatedSohbetIdRoute
+  AuthenticatedSohbetIndexRoute: typeof AuthenticatedSohbetIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -228,7 +219,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHayvanlarRoute: AuthenticatedHayvanlarRoute,
   AuthenticatedIhbarlarRoute: AuthenticatedIhbarlarRoute,
   AuthenticatedProfilRoute: AuthenticatedProfilRoute,
-  AuthenticatedSohbetRoute: AuthenticatedSohbetRouteWithChildren,
+  AuthenticatedSohbetIdRoute: AuthenticatedSohbetIdRoute,
+  AuthenticatedSohbetIndexRoute: AuthenticatedSohbetIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

@@ -59,7 +59,7 @@ function ChatDetail() {
   return (
     <div className="flex h-screen flex-col bg-background">
       <header className="flex items-center gap-3 border-b border-border bg-card/95 px-4 py-3 backdrop-blur">
-        <Link to="/app/chat" className="rounded-full p-1.5 hover:bg-muted"><ArrowLeft className="h-5 w-5" /></Link>
+        <Link to="/sohbet" className="rounded-full p-1.5 hover:bg-muted"><ArrowLeft className="h-5 w-5" /></Link>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent font-bold text-secondary">
           {other?.full_name?.[0] ?? other?.username?.[0] ?? "?"}
         </div>

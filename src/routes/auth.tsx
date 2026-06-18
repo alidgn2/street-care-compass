@@ -25,7 +25,7 @@ function AuthPage() {
   const [loading, setLoading] = useState(false);
 
   if (user) {
-    navigate({ to: "/app", replace: true });
+    navigate({ to: "/harita", replace: true });
     return null;
   }
 
@@ -49,7 +49,7 @@ function AuthPage() {
         if (error) throw error;
         toast.success("Hoş geldin!");
       }
-      navigate({ to: "/app", replace: true });
+      navigate({ to: "/harita", replace: true });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Bir hata oluştu";
       toast.error(msg);

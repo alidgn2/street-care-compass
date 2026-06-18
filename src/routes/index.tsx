@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { user, loading } = useAuth();
-  if (!loading && user) return <Navigate to="/app" />;
+  if (!loading && user) return <Navigate to="/harita" />;
 
   return (
     <div className="min-h-screen" style={{ background: "var(--gradient-soft)" }}>

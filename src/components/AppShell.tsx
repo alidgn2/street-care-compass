@@ -3,11 +3,11 @@ import type { ReactNode } from "react";
 import { Map, AlertTriangle, PawPrint, MessageCircle, User } from "lucide-react";
 
 const tabs = [
-  { to: "/app", label: "Harita", icon: Map },
-  { to: "/app/reports", label: "İhbar", icon: AlertTriangle },
-  { to: "/app/animals", label: "Hayvanlar", icon: PawPrint },
-  { to: "/app/chat", label: "Sohbet", icon: MessageCircle },
-  { to: "/app/profile", label: "Profil", icon: User },
+  { to: "/harita", label: "Harita", icon: Map },
+  { to: "/ihbarlar", label: "İhbar", icon: AlertTriangle },
+  { to: "/hayvanlar", label: "Hayvanlar", icon: PawPrint },
+  { to: "/sohbet", label: "Sohbet", icon: MessageCircle },
+  { to: "/profil", label: "Profil", icon: User },
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -18,7 +18,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-card/95 backdrop-blur-md shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.1)]">
         <div className="mx-auto flex max-w-2xl items-center justify-around px-2 py-2">
           {tabs.map((t) => {
-            const active = t.to === "/app" ? pathname === "/app" : pathname.startsWith(t.to);
+            const active = t.to === "/harita" ? pathname === "/harita" : pathname.startsWith(t.to);
             const Icon = t.icon;
             return (
               <Link
