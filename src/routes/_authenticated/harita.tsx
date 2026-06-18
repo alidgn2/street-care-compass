@@ -76,12 +76,12 @@ function MapPage() {
     const fed = feedings.map((f) => ({
       id: `f-${f.id}`, lat: f.lat, lng: f.lng,
       kind: (`feeding-${feedingFreshness(f.created_at)}` as MapMarker["kind"]),
-      popup: `<div><b>${f.street_name ?? "Sokak"}</b><br/>${f.feeding_type === "food" ? "🍽 Mama" : f.feeding_type === "water" ? "💧 Su" : "🍽💧 Mama+Su"}<br/><span style="color:#888">${timeAgo(f.created_at)}</span>${f.notes ? `<br/><i>${f.notes}</i>` : ""}</div>`,
+      popup: `<div><b>${escapeHtml(f.street_name ?? "Sokak")}</b><br/>${f.feeding_type === "food" ? "🍽 Mama" : f.feeding_type === "water" ? "💧 Su" : "🍽💧 Mama+Su"}<br/><span style="color:#888">${escapeHtml(timeAgo(f.created_at))}</span>${f.notes ? `<br/><i>${escapeHtml(f.notes)}</i>` : ""}</div>`,
     }));
     const inj = injuries.map((i) => ({
       id: `i-${i.id}`, lat: i.lat, lng: i.lng,
       kind: "injury" as const,
-      popup: `<div><b style="color:#dc2626">🚨 Yaralı hayvan</b><br/>${i.description.slice(0, 100)}<br/><span style="color:#888">${timeAgo(i.created_at)}</span></div>`,
+      popup: `<div><b style="color:#dc2626">🚨 Yaralı hayvan</b><br/>${escapeHtml(i.description.slice(0, 100))}<br/><span style="color:#888">${escapeHtml(timeAgo(i.created_at))}</span></div>`,
     }));
     return [...fed, ...inj];
   }, [feedings, injuries]);
