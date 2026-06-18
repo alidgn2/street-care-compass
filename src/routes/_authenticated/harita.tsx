@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell, PageHeader } from "@/components/AppShell";
 import { MapView, type MapMarker } from "@/components/MapView";
 import { FeedingDialog } from "@/components/FeedingDialog";
-import { getCurrentPosition, feedingFreshness, timeAgo } from "@/lib/pati-utils";
+import { getCurrentPosition, feedingFreshness, timeAgo, escapeHtml } from "@/lib/pati-utils";
 import { Plus, Locate, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
