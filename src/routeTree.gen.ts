@@ -16,8 +16,10 @@ import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedIhbarlarRouteImport } from './routes/_authenticated/ihbarlar'
 import { Route as AuthenticatedHayvanlarRouteImport } from './routes/_authenticated/hayvanlar'
 import { Route as AuthenticatedHaritaRouteImport } from './routes/_authenticated/harita'
+import { Route as AuthenticatedEtkinliklerRouteImport } from './routes/_authenticated/etkinlikler'
 import { Route as AuthenticatedSohbetIndexRouteImport } from './routes/_authenticated/sohbet.index'
 import { Route as AuthenticatedSohbetIdRouteImport } from './routes/_authenticated/sohbet.$id'
+import { Route as AuthenticatedHayvanIdRouteImport } from './routes/_authenticated/hayvan.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -53,6 +55,12 @@ const AuthenticatedHaritaRoute = AuthenticatedHaritaRouteImport.update({
   path: '/harita',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEtkinliklerRoute =
+  AuthenticatedEtkinliklerRouteImport.update({
+    id: '/etkinlikler',
+    path: '/etkinlikler',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSohbetIndexRoute =
   AuthenticatedSohbetIndexRouteImport.update({
     id: '/sohbet/',
@@ -64,24 +72,33 @@ const AuthenticatedSohbetIdRoute = AuthenticatedSohbetIdRouteImport.update({
   path: '/sohbet/$id',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedHayvanIdRoute = AuthenticatedHayvanIdRouteImport.update({
+  id: '/hayvan/$id',
+  path: '/hayvan/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/etkinlikler': typeof AuthenticatedEtkinliklerRoute
   '/harita': typeof AuthenticatedHaritaRoute
   '/hayvanlar': typeof AuthenticatedHayvanlarRoute
   '/ihbarlar': typeof AuthenticatedIhbarlarRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/hayvan/$id': typeof AuthenticatedHayvanIdRoute
   '/sohbet/$id': typeof AuthenticatedSohbetIdRoute
   '/sohbet/': typeof AuthenticatedSohbetIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/etkinlikler': typeof AuthenticatedEtkinliklerRoute
   '/harita': typeof AuthenticatedHaritaRoute
   '/hayvanlar': typeof AuthenticatedHayvanlarRoute
   '/ihbarlar': typeof AuthenticatedIhbarlarRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/hayvan/$id': typeof AuthenticatedHayvanIdRoute
   '/sohbet/$id': typeof AuthenticatedSohbetIdRoute
   '/sohbet': typeof AuthenticatedSohbetIndexRoute
 }
@@ -90,10 +107,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/etkinlikler': typeof AuthenticatedEtkinliklerRoute
   '/_authenticated/harita': typeof AuthenticatedHaritaRoute
   '/_authenticated/hayvanlar': typeof AuthenticatedHayvanlarRoute
   '/_authenticated/ihbarlar': typeof AuthenticatedIhbarlarRoute
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
+  '/_authenticated/hayvan/$id': typeof AuthenticatedHayvanIdRoute
   '/_authenticated/sohbet/$id': typeof AuthenticatedSohbetIdRoute
   '/_authenticated/sohbet/': typeof AuthenticatedSohbetIndexRoute
 }
@@ -102,20 +121,24 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/etkinlikler'
     | '/harita'
     | '/hayvanlar'
     | '/ihbarlar'
     | '/profil'
+    | '/hayvan/$id'
     | '/sohbet/$id'
     | '/sohbet/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/etkinlikler'
     | '/harita'
     | '/hayvanlar'
     | '/ihbarlar'
     | '/profil'
+    | '/hayvan/$id'
     | '/sohbet/$id'
     | '/sohbet'
   id:
@@ -123,10 +146,12 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/etkinlikler'
     | '/_authenticated/harita'
     | '/_authenticated/hayvanlar'
     | '/_authenticated/ihbarlar'
     | '/_authenticated/profil'
+    | '/_authenticated/hayvan/$id'
     | '/_authenticated/sohbet/$id'
     | '/_authenticated/sohbet/'
   fileRoutesById: FileRoutesById
@@ -188,6 +213,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHaritaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/etkinlikler': {
+      id: '/_authenticated/etkinlikler'
+      path: '/etkinlikler'
+      fullPath: '/etkinlikler'
+      preLoaderRoute: typeof AuthenticatedEtkinliklerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/sohbet/': {
       id: '/_authenticated/sohbet/'
       path: '/sohbet'
@@ -202,23 +234,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSohbetIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/hayvan/$id': {
+      id: '/_authenticated/hayvan/$id'
+      path: '/hayvan/$id'
+      fullPath: '/hayvan/$id'
+      preLoaderRoute: typeof AuthenticatedHayvanIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedEtkinliklerRoute: typeof AuthenticatedEtkinliklerRoute
   AuthenticatedHaritaRoute: typeof AuthenticatedHaritaRoute
   AuthenticatedHayvanlarRoute: typeof AuthenticatedHayvanlarRoute
   AuthenticatedIhbarlarRoute: typeof AuthenticatedIhbarlarRoute
   AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
+  AuthenticatedHayvanIdRoute: typeof AuthenticatedHayvanIdRoute
   AuthenticatedSohbetIdRoute: typeof AuthenticatedSohbetIdRoute
   AuthenticatedSohbetIndexRoute: typeof AuthenticatedSohbetIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedEtkinliklerRoute: AuthenticatedEtkinliklerRoute,
   AuthenticatedHaritaRoute: AuthenticatedHaritaRoute,
   AuthenticatedHayvanlarRoute: AuthenticatedHayvanlarRoute,
   AuthenticatedIhbarlarRoute: AuthenticatedIhbarlarRoute,
   AuthenticatedProfilRoute: AuthenticatedProfilRoute,
+  AuthenticatedHayvanIdRoute: AuthenticatedHayvanIdRoute,
   AuthenticatedSohbetIdRoute: AuthenticatedSohbetIdRoute,
   AuthenticatedSohbetIndexRoute: AuthenticatedSohbetIndexRoute,
 }
