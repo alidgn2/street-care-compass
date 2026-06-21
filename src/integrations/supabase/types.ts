@@ -54,6 +54,8 @@ export type Database = {
       }
       animals: {
         Row: {
+          adoptable: boolean
+          adoption_contact: string | null
           city: string | null
           created_at: string
           created_by: string
@@ -64,6 +66,7 @@ export type Database = {
           name: string | null
           neighborhood: string | null
           neutered: boolean
+          next_vaccine_date: string | null
           photo_url: string | null
           species: string
           street_name: string | null
@@ -71,6 +74,8 @@ export type Database = {
           vaccinated: boolean
         }
         Insert: {
+          adoptable?: boolean
+          adoption_contact?: string | null
           city?: string | null
           created_at?: string
           created_by: string
@@ -81,6 +86,7 @@ export type Database = {
           name?: string | null
           neighborhood?: string | null
           neutered?: boolean
+          next_vaccine_date?: string | null
           photo_url?: string | null
           species: string
           street_name?: string | null
@@ -88,6 +94,8 @@ export type Database = {
           vaccinated?: boolean
         }
         Update: {
+          adoptable?: boolean
+          adoption_contact?: string | null
           city?: string | null
           created_at?: string
           created_by?: string
@@ -98,6 +106,7 @@ export type Database = {
           name?: string | null
           neighborhood?: string | null
           neutered?: boolean
+          next_vaccine_date?: string | null
           photo_url?: string | null
           species?: string
           street_name?: string | null
@@ -129,6 +138,112 @@ export type Database = {
           user2_id?: string
         }
         Relationships: []
+      }
+      event_rsvps: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_rsvps_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          city: string | null
+          created_at: string
+          created_by: string
+          description: string | null
+          event_type: string
+          id: string
+          lat: number
+          lng: number
+          location_name: string | null
+          neighborhood: string | null
+          starts_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          created_by: string
+          description?: string | null
+          event_type?: string
+          id?: string
+          lat: number
+          lng: number
+          location_name?: string | null
+          neighborhood?: string | null
+          starts_at: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          event_type?: string
+          id?: string
+          lat?: number
+          lng?: number
+          location_name?: string | null
+          neighborhood?: string | null
+          starts_at?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      feeding_verifications: {
+        Row: {
+          created_at: string
+          feeding_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          feeding_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          feeding_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feeding_verifications_feeding_id_fkey"
+            columns: ["feeding_id"]
+            isOneToOne: false
+            referencedRelation: "feedings"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       feedings: {
         Row: {
